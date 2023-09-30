@@ -1,14 +1,15 @@
-import Home from '@/app/home'
-import HomeLayout from './layouts/HomeLayout'
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '@/common/resources/api';
+import Home from '@/app/Home'
+import Layout from './layouts/Layout'
 
-export default function HomePage() {
+
+const HomePage = () => {
     return (
-        <QueryClientProvider client={queryClient}>
+        <main>
             <Home />
-        </QueryClientProvider>
+        </main>
     )
 }
 
-HomePage.useLayout = HomeLayout;
+HomePage.getLayout = Layout;
+
+export default HomePage;

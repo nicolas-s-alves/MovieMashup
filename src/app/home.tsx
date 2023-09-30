@@ -1,6 +1,6 @@
 import { useGetNowPlayingMovies } from '@/common/resources/api/movie-lists/hooks'
 import { MovieResult } from '@/common/resources/api/movie-lists/types';
-import Image from 'next/image';
+import { Button } from '@mui/material';
 
 const Home = () => {
   const { data: nowPlayingMoviesData, isLoading } = useGetNowPlayingMovies();
@@ -17,16 +17,27 @@ const Home = () => {
 
       <div className='flex gap-4 overflow-auto'>
         {nowPlayingMoviesData?.results?.map((nowPlayingMovie: MovieResult, index: number) => {
-          return (
-            <div key={index} className='flex flex-col flex-shrink-0'>
-              <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${nowPlayingMovie.poster_path}`} alt={nowPlayingMovie.title} className='w-auto' />
-              <span>{nowPlayingMovie.title}</span>
-              <span>{new Date(nowPlayingMovie.release_date).toLocaleDateString('pt-BR')}</span>
-              <span>Nota: {nowPlayingMovie.vote_average}</span>
-            </div>)
+          return <MovieCard key={index} nowPlayingMovie={nowPlayingMovie} />
         })}
       </div>
+
+      <Button variant="contained">Hello world</Button>
     </main>
+  )
+}
+
+interface MovieCardProps {
+  nowPlayingMovie: MovieResult
+}
+
+const MovieCard = ({ nowPlayingMovie }: MovieCardProps) => {
+  return (
+    <div className='flex flex-col flex-shrink-0'>
+      <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${nowPlayingMovie.poster_path}`} alt={nowPlayingMovie.title} className='w-auto' />
+      <span>{nowPlayingMovie.title}</span>
+      <span>{new Date(nowPlayingMovie.release_date).toLocaleDateString('pt-BR')}</span>
+      <span>Nota: {nowPlayingMovie.vote_average}</span>
+    </div>
   )
 }
 
