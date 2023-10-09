@@ -1,29 +1,47 @@
 import '@/app/globals.css'
-import MuiAppBar from '@mui/material/AppBar'
-import Typography from '@mui/material/Typography';
+import clsx from 'clsx';
+import Link from 'next/link';
+import { Router, useRouter } from 'next/router';
 import { ReactElement } from 'react';
+
 
 export default function Layout(
     page: ReactElement
 ) {
 
-    return (
-        <>
-            <MuiAppBar position='absolute' className='px-4 py-2'>
-                <Typography
-                    component="h1"
-                    variant="h6"
-                    color="inherit"
-                    noWrap
-                    sx={{ flexGrow: 1 }}
-                >
-                    Movie Mashup
-                </Typography>
-            </MuiAppBar>
+    const { pathname } = useRouter();
 
-            <div className='mt-12'>
-                {page}
+    return (
+        <div className='flex'>
+
+
+            <div className='h-screen shadow p-4 flex justify-center w-[10%]'>
+                <span className='font-semibold'>
+                    Movie Mashup
+                </span>
             </div>
-        </>
+
+            <div className='flex flex-col w-[90%]'>
+                <div className='shadow p-4 flex gap-4'>
+                    <Link href='/' className={clsx('border-b-2', { 'border-black font-semibold': pathname === '/' })}>
+                        Now Playing
+                    </Link>
+
+                    <Link href='/' className={clsx('border-b-2', { 'border-black font-semibold': pathname === '/popular' })}>
+                        Popular
+                    </Link>
+
+                    <Link href='/' className={clsx('border-b-2', { 'border-black font-semibold': pathname === '/top-rated' })}>
+                        Top Rated
+                    </Link>
+                </div>
+
+                <div className='p-4'>
+
+
+                    {page}
+                </div>
+            </div>
+        </div>
     )
 }
