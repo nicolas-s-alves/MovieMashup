@@ -1,15 +1,11 @@
-import Home from '@/app/Home'
-import Layout from './layouts/Layout'
+import { Home } from '@/app/Home'
+import MainLayout from './layouts/MainLayout'
 
 
 const HomePage = () => {
-    return (
-        <main>
-            <Home />
-        </main>
-    )
+    return <Home />
 }
 
-HomePage.getLayout = Layout;
+HomePage.getLayout = MainLayout;
 
-export default HomePage;
+export default HomePage; 
