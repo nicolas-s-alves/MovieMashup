@@ -3,7 +3,7 @@ import { MovieData } from '@/common/resources/api/movie-lists/types';
 import { MovieListEnum } from "@/enums/movie-list.enum";
 
 export const MovieListsApi = {
-  async getMovieList(movieList: MovieListEnum, page = 1, language = 'pt-BR') {
+  async getMovieList(movieList: MovieListEnum, page = 1, language = 'en-US') {
     const params: { page: number, language: string } = {
       page,
       language

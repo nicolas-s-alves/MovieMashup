@@ -43,7 +43,7 @@ const variants = cva(
       {
         disabled: true,
         intent: 'primary',
-        class: 'bg-slate-300 text-slate-400',
+        class: 'bg-slate-300 text-slate-400 dark:text-slate-500',
       },
     ],
     defaultVariants: {
