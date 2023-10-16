@@ -1,12 +1,15 @@
-import { useModalContext } from "@/contexts/ModalContext"
-import { Transition, Dialog } from "@headlessui/react"
-import { Fragment } from "react"
-import { Button } from "../Button";
+import { Transition, Dialog } from '@headlessui/react';
+import { Fragment } from 'react';
 
+import { useModalContext } from '@/contexts/ModalContext';
 
+import { Button } from '../Button';
 
 export const Modal = () => {
-  const { modalData: { title, content, open }, closeModal } = useModalContext();
+  const {
+    modalData: { title, content, open },
+    closeModal,
+  } = useModalContext();
 
   return (
     <Transition appear show={open} as={Fragment}>
@@ -42,17 +45,11 @@ export const Modal = () => {
                   {title}
                 </Dialog.Title>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    {content}
-                  </p>
+                  <p className="text-sm text-gray-500">{content}</p>
                 </div>
 
                 <div className="mt-4">
-                  <Button
-                    type="button"
-                    onClick={closeModal}
-                    intent='secondary'
-                  >
+                  <Button type="button" onClick={closeModal} intent="secondary">
                     Ok
                   </Button>
                 </div>
@@ -62,5 +59,5 @@ export const Modal = () => {
         </div>
       </Dialog>
     </Transition>
-  )
-}
+  );
+};
