@@ -1,7 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { MovieListsApi } from '@/common/resources/api/movie-lists';
 import { LanguageEnum } from '@/enums/language.enum';
 import { MovieListEnum } from '@/enums/movie-list.enum';
-import { useQuery } from '@tanstack/react-query';
 
 export function useGetNowPlayingMovieList(page?: number) {
   return useQuery({

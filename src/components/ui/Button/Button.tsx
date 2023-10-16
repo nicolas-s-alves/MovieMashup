@@ -1,5 +1,5 @@
 import { cva, VariantProps } from 'class-variance-authority';
-import { PropsWithChildren, ButtonHTMLAttributes, ReactNode } from "react";
+import { PropsWithChildren, ButtonHTMLAttributes, ReactNode } from 'react';
 
 type ButtonProps = PropsWithChildren<{
   disabled?: boolean;
@@ -7,7 +7,13 @@ type ButtonProps = PropsWithChildren<{
   VariantProps<typeof variants> &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = ({ children, intent, fill, disabled, ...props }: ButtonProps): ReactNode => {
+export const Button = ({
+  children,
+  intent,
+  fill,
+  disabled,
+  ...props
+}: ButtonProps): ReactNode => {
   return (
     <button
       type="button"
@@ -18,7 +24,7 @@ export const Button = ({ children, intent, fill, disabled, ...props }: ButtonPro
       {children}
     </button>
   );
-}
+};
 
 const variants = cva(
   'rounded-md px-4 py-2 text-sm font-medium transition-all',
@@ -29,8 +35,8 @@ const variants = cva(
           'bg-blue-500 text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
         ],
         secondary: [
-          'bg-blue-100 text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-        ]
+          'bg-blue-100 text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2',
+        ],
       },
       fill: {
         true: 'w-full',

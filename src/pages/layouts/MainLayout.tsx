@@ -1,25 +1,20 @@
+import { FilmIcon } from '@heroicons/react/24/solid';
 import { ReactElement } from 'react';
-import { FilmIcon } from '@heroicons/react/24/solid'
 
-export default function MainLayout(
-  page: ReactElement
-) {
+export default function MainLayout(page: ReactElement) {
   return (
-    <div className='flex flex-col lg:flex-row'>
-      <div className='w-full lg:w-[10%] h-auto lg:h-screen shadow p-4 flex flex-col justify-between fixed z-10 dark:bg-gray-900 bg-white'>
-        <div className='h-fit flex justify-center items-center gap-2 dark:text-white text-blue-500'>
+    <div className="flex flex-col lg:flex-row">
+      <div className="fixed z-10 flex h-auto w-full flex-col justify-between bg-white p-4 shadow dark:bg-gray-900 lg:h-screen lg:w-[10%]">
+        <div className="flex h-fit items-center justify-center gap-2 text-blue-500 dark:text-white">
+          <FilmIcon className="h-5 w-5" />
 
-          <FilmIcon className='w-5 h-5' />
-
-          <span className='font-semibold text-lg'>
-            Movie Mashup
-          </span>
+          <span className="text-lg font-semibold">Movie Mashup</span>
         </div>
       </div>
 
-      <div className='flex flex-col w-full lg:w-[90%] lg:ml-[10%] p-4 lg:mt-auto mt-16'>
+      <div className="mt-16 flex w-full flex-col p-4 lg:ml-[10%] lg:mt-auto lg:w-[90%]">
         {page}
       </div>
     </div>
-  )
-} 
+  );
+}
