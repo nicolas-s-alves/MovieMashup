@@ -1,9 +1,16 @@
 import { Home } from '@/app/Home';
-
 import MainLayout from './layouts/MainLayout';
+import Head from 'next/head';
 
 const HomePage = () => {
-  return <Home />;
+  return (
+    <>
+      <Head>
+        <title>Movie Mashup</title>
+      </Head>
+      <Home />
+    </>
+  );
 };
 
 HomePage.getLayout = MainLayout;

@@ -28,8 +28,6 @@ export default class AppDocument extends Document<{
           />
 
           <link rel="icon" href="/assets/favicon.ico" />
-
-          <title>Movie Mashup</title>
         </Head>
         <body>
           <Main />
