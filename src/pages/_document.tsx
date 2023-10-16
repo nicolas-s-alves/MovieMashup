@@ -26,14 +26,10 @@ export default class AppDocument extends Document<{
             type="text/javascript"
             dangerouslySetInnerHTML={{ __html: this.props.browserTimingHeader }}
           />
-
           <link rel="icon" href="/assets/favicon.ico" />
-
-          <title>Movie Mashup</title>
         </Head>
         <body>
           <Main />
-
           <NextScript />
         </body>
       </Html>
