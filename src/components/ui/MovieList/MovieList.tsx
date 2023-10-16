@@ -5,7 +5,7 @@ import {
   MovieData,
   MovieResult,
 } from '@/common/resources/api/movie-lists/types';
-import { useModalContext } from '@/contexts/ModalContext';
+import { useModal } from '@/hooks/useModal';
 
 import { Button } from '../Button';
 import { MovieCard } from '../MovieCard';
@@ -16,6 +16,24 @@ interface MovieListProps {
 }
 
 export const MovieList = ({ movies, isLoading }: MovieListProps) => {
+  const { openModal } = useModal();
+
+  const movieCardFooter = useCallback(
+    (overview: string) => {
+      return (
+        <Button
+          type="button"
+          onClick={() => openModal({ title: 'Overview', content: overview })}
+          intent="primary"
+          fill
+        >
+          Overview
+        </Button>
+      );
+    },
+    [openModal],
+  );
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center gap-4">
@@ -24,21 +42,6 @@ export const MovieList = ({ movies, isLoading }: MovieListProps) => {
       </div>
     );
   }
-
-  const { openModal } = useModalContext();
-
-  const movieCardFooter = useCallback((overview: string) => {
-    return (
-      <Button
-        type="button"
-        onClick={() => openModal({ title: 'Overview', content: overview })}
-        intent="primary"
-        fill
-      >
-        Overview
-      </Button>
-    );
-  }, []);
 
   return (
     <div className="-m-4 flex gap-4 overflow-auto p-4">
