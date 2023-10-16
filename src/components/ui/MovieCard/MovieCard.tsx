@@ -27,7 +27,7 @@ export const MovieCard = ({ movie, footerChildren }: MovieCardProps) => {
         <div className="absolute -left-1 -top-5 flex w-auto items-center justify-center gap-1 rounded-full bg-white p-2 font-semibold shadow dark:bg-slate-700">
           <CalendarDaysIcon className="h-4 w-4 text-blue-500" />
 
-          <span className=" text-xs">
+          <span className="text-xs">
             {new Date(movie.release_date).toLocaleDateString('pt-BR')}
           </span>
         </div>

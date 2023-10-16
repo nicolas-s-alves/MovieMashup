@@ -1,14 +1,13 @@
 import { Cog8ToothIcon } from '@heroicons/react/24/solid';
 import { useCallback } from 'react';
-
 import {
   MovieData,
   MovieResult,
 } from '@/common/resources/api/movie-lists/types';
 import { useModal } from '@/hooks/useModal';
-
 import { Button } from '../Button';
 import { MovieCard } from '../MovieCard';
+import { MovieCardSkeleton } from '../MovieCardSkeleton';
 
 interface MovieListProps {
   movies: MovieData | undefined;
@@ -33,9 +32,12 @@ export const MovieList = ({ movies, isLoading }: MovieListProps) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center gap-4">
-        <span>Carregando...</span>
-        <Cog8ToothIcon className="w-6 animate-spin" />
+      <div className="-m-4 flex gap-4 overflow-auto p-4">
+        {Array(20)
+          .fill(true)
+          .map((_, i) => (
+            <MovieCardSkeleton key={i} />
+          ))}
       </div>
     );
   }
