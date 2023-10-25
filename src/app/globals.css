@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -22,25 +21,42 @@
   font-family: 'Prompt', sans-serif;
 }
 
-
 @layer base {
   body {
-    @apply dark:bg-gray-800 bg-slate-100
+    @apply bg-slate-100 dark:bg-gray-800;
   }
 }
 
 ::-webkit-scrollbar {
-  @apply w-2
+  @apply w-2;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-200 rounded-sm mx-4
+  @apply mx-4 rounded-sm bg-slate-200;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-blue-500 rounded-sm
+  @apply rounded-sm bg-blue-500;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-500
+  @apply bg-slate-500;
+}
+
+.bg-gradient-animate {
+  background-size: 200%;
+
+  -webkit-animation: GradientAnimation 1s ease infinite;
+  -moz-animation: GradientAnimation 1s ease infinite;
+  animation: GradientAnimation 1s ease infinite;
+}
+
+@keyframes GradientAnimation {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }

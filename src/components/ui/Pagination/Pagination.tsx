@@ -16,7 +16,7 @@ export const Pagination = ({ page, backPage, nextPage }: PaginationProps) => {
         <ArrowLeftIcon className="w-4" />
       </Button>
 
-      <span>{page}</span>
+      <span>Page {page}</span>
 
       <Button type="button" onClick={nextPage}>
         <ArrowRightIcon className="w-4" />

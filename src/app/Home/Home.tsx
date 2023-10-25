@@ -1,7 +1,10 @@
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
+import {
+  MoonIcon,
+  SunIcon,
+  QuestionMarkCircleIcon,
+} from '@heroicons/react/24/solid';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import {
   useGetNowPlayingMovieList,
   useGetPopularMovieList,
@@ -14,6 +17,7 @@ import { Pagination } from '@/components/ui/Pagination';
 
 export const Home = () => {
   const { theme, setTheme } = useTheme();
+  const [activeTheme, setActiveTheme] = useState<string | undefined>(undefined);
 
   const [nowPlayingPage, setNowPlayingPage] = useState<number>(1);
   const [popularPage, setPopularPage] = useState<number>(1);
@@ -29,20 +33,28 @@ export const Home = () => {
   const { data: upcomingMovieListData, isLoading: isUpcomingLoading } =
     useGetUpcomingMovieList(upcomingPage);
 
+  useEffect(() => {
+    setActiveTheme(theme);
+  }, [theme]);
+
   return (
     <main className="flex flex-col gap-8 lg:gap-6">
       <div className="flex items-center justify-between">
         <span className="text-xl font-semibold">Welcome!</span>
-        <Button
-          type="button"
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        >
-          {theme === 'dark' ? (
-            <SunIcon className="w-4" />
-          ) : (
-            <MoonIcon className="w-4" />
-          )}
-        </Button>
+        {activeTheme && (
+          <Button
+            type="button"
+            onClick={() => setTheme(activeTheme === 'dark' ? 'light' : 'dark')}
+          >
+            {activeTheme === 'dark' ? (
+              <MoonIcon className="w-4" />
+            ) : activeTheme === 'light' ? (
+              <SunIcon className="w-4" />
+            ) : (
+              <QuestionMarkCircleIcon className="w-4" />
+            )}
+          </Button>
+        )}
       </div>
 
       <div className="flex items-center justify-between">

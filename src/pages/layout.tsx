@@ -1,11 +1,11 @@
 import { FilmIcon } from '@heroicons/react/24/solid';
 import { ReactNode } from 'react';
 
-interface MainLayoutProps {
+interface LayoutProps {
   children: ReactNode;
 }
 
-export default function MainLayout({ children }: MainLayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col lg:flex-row">
       <div className="fixed z-10 flex h-auto w-full flex-col justify-between bg-white p-4 shadow dark:bg-gray-900 lg:h-screen lg:w-[10%]">
