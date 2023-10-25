@@ -9,7 +9,10 @@ import { queryClient } from '@/common/resources/api';
 import { Modal } from '@/components/ui/Modal/Modal';
 import { ModalProvider } from '@/contexts/ModalContext';
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = Record<string, never>, IP = P> = NextPage<
+  P,
+  IP
+> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
