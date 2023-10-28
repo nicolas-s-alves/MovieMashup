@@ -1,4 +1,3 @@
-import { Cog8ToothIcon } from '@heroicons/react/24/solid';
 import { useCallback } from 'react';
 import {
   MovieData,
@@ -8,6 +7,7 @@ import { useModal } from '@/hooks/useModal';
 import { Button } from '../Button';
 import { MovieCard } from '../MovieCard';
 import { MovieCardSkeleton } from '../MovieCardSkeleton';
+import Link from 'next/link';
 
 interface MovieListProps {
   movies: MovieData | undefined;
@@ -17,18 +17,25 @@ interface MovieListProps {
 export const MovieList = ({ movies, isLoading }: MovieListProps) => {
   const { openModal } = useModal();
 
-  const movieCardFooter = useCallback((overview: string) => {
-    return (
-      <Button
-        type="button"
-        onClick={() => openModal({ title: 'Overview', content: overview })}
-        intent="primary"
-        fill
-      >
-        Overview
-      </Button>
-    );
-  }, []);
+  const movieCardFooter = useCallback(
+    (overview: string, movieId: number) => {
+      return (
+        <>
+          <Button
+            type="button"
+            onClick={() => openModal({ title: 'Overview', content: overview })}
+            intent="primary"
+            fill
+          >
+            Overview
+          </Button>
+
+          <Link href={`/${movieId}`}>Details</Link>
+        </>
+      );
+    },
+    [openModal],
+  );
 
   if (isLoading) {
     return (
@@ -49,7 +56,7 @@ export const MovieList = ({ movies, isLoading }: MovieListProps) => {
           <MovieCard
             key={index}
             movie={movie}
-            footerChildren={movieCardFooter(movie.overview)}
+            footerChildren={movieCardFooter(movie.overview, movie.id)}
           />
         );
       })}

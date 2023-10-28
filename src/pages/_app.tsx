@@ -20,6 +20,13 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+// export const metadata: Metadata = {
+//   title: 'Movie Mashup',
+//   description: 'A movie database',
+//   manifest: '/manifest.json',
+//   icons: { apple: '/icon.png' },
+// };
+
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? (page => page);
 

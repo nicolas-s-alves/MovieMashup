@@ -1,8 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    images: {
-        domains: ['image.tmdb.org']
-    }
-}
+const withPWA = require('next-pwa');
 
-module.exports = nextConfig
+const nextConfig = {
+  ...withPWA({
+    dest: 'public',
+    register: true,
+  }),
+  images: {
+    domains: ['image.tmdb.org'],
+  },
+};
+
+module.exports = nextConfig;
