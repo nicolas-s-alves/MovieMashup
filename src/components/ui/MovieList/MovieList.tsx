@@ -20,18 +20,22 @@ export const MovieList = ({ movies, isLoading }: MovieListProps) => {
   const movieCardFooter = useCallback(
     (overview: string, movieId: number) => {
       return (
-        <>
+        <div className="flex gap-4">
           <Button
             type="button"
             onClick={() => openModal({ title: 'Overview', content: overview })}
-            intent="primary"
+            intent="secondary"
             fill
           >
             Overview
           </Button>
 
-          <Link href={`/${movieId}`}>Details</Link>
-        </>
+          <Link href={`/${movieId}`}>
+            <Button type="button" intent="primary" fill>
+              Details
+            </Button>
+          </Link>
+        </div>
       );
     },
     [openModal],
