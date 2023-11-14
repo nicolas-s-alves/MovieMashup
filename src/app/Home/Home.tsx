@@ -24,6 +24,9 @@ export const Home = () => {
   const [topRatedPage, setTopRatedPage] = useState<number>(1);
   const [upcomingPage, setUpcomingPage] = useState<number>(1);
 
+  const [prompEvent, setPromptEvent] = useState<any>(null);
+  const [isPWAInstalled, setIsPWAInstalled] = useState<boolean>();
+
   const { data: nowPlayingMovieListData, isLoading: isNowPlayingLoading } =
     useGetNowPlayingMovieList(nowPlayingPage);
   const { data: popularMovieListData, isLoading: isPopularLoading } =
@@ -34,26 +37,20 @@ export const Home = () => {
     useGetUpcomingMovieList(upcomingPage);
 
   useEffect(() => {
+    window.addEventListener('beforeinstallprompt', event => {
+      event.preventDefault();
+      setPromptEvent(event);
+    });
+
+    setIsPWAInstalled(window.matchMedia('(display-mode: standalone)').matches);
+  }, []);
+
+  useEffect(() => {
     setActiveTheme(theme);
   }, [theme]);
 
   const installPWA = () => {
-    console.log('Pop install banner');
-
-    navigator.serviceWorker.ready.then(registration => {
-      registration.showNotification('Install Movie Mashup', {
-        body: 'Tap here to install the app',
-        icon: '/icon-192x192.png',
-        vibrate: [200, 100, 200],
-        tag: 'install-notification',
-        actions: [
-          {
-            action: 'install',
-            title: 'Install',
-          },
-        ],
-      });
-    });
+    prompEvent.prompt();
   };
 
   return (
@@ -62,9 +59,11 @@ export const Home = () => {
         <span className="text-xl font-semibold">Welcome!</span>
 
         <div className="flex gap-4">
-          <Button onClick={installPWA} type="button">
-            Install
-          </Button>
+          {!isPWAInstalled && (
+            <Button type="button" onClick={installPWA}>
+              Install
+            </Button>
+          )}
           {activeTheme && (
             <Button
               type="button"
