@@ -37,24 +37,51 @@ export const Home = () => {
     setActiveTheme(theme);
   }, [theme]);
 
+  const installPWA = () => {
+    console.log('Pop install banner');
+
+    navigator.serviceWorker.ready.then(registration => {
+      registration.showNotification('Install Movie Mashup', {
+        body: 'Tap here to install the app',
+        icon: '/icon-192x192.png',
+        vibrate: [200, 100, 200],
+        tag: 'install-notification',
+        actions: [
+          {
+            action: 'install',
+            title: 'Install',
+          },
+        ],
+      });
+    });
+  };
+
   return (
     <main className="flex flex-col gap-8 lg:gap-6">
       <div className="flex items-center justify-between">
         <span className="text-xl font-semibold">Welcome!</span>
-        {activeTheme && (
-          <Button
-            type="button"
-            onClick={() => setTheme(activeTheme === 'dark' ? 'light' : 'dark')}
-          >
-            {activeTheme === 'dark' ? (
-              <MoonIcon className="w-4" />
-            ) : activeTheme === 'light' ? (
-              <SunIcon className="w-4" />
-            ) : (
-              <QuestionMarkCircleIcon className="w-4" />
-            )}
+
+        <div className="flex gap-4">
+          <Button onClick={installPWA} type="button">
+            Install
           </Button>
-        )}
+          {activeTheme && (
+            <Button
+              type="button"
+              onClick={() =>
+                setTheme(activeTheme === 'dark' ? 'light' : 'dark')
+              }
+            >
+              {activeTheme === 'dark' ? (
+                <MoonIcon className="w-4" />
+              ) : activeTheme === 'light' ? (
+                <SunIcon className="w-4" />
+              ) : (
+                <QuestionMarkCircleIcon className="w-4" />
+              )}
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="flex items-center justify-between">

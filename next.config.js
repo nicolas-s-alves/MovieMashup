@@ -5,6 +5,7 @@ const nextConfig = {
   ...withPWA({
     dest: 'public',
     register: true,
+    sw: 'service-worker.js',
   }),
   images: {
     domains: ['image.tmdb.org'],
