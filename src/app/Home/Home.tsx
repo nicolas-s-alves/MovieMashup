@@ -15,6 +15,15 @@ import { Button } from '@/components/ui/Button';
 import { MovieList } from '@/components/ui/MovieList';
 import { Pagination } from '@/components/ui/Pagination';
 
+interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: ReadonlyArray<string>;
+  readonly userChoice: Promise<{
+    outcome: 'accepted' | 'dismissed';
+    platform: string;
+  }>;
+  prompt(): Promise<void>;
+}
+
 export const Home = () => {
   const { theme, setTheme } = useTheme();
   const [activeTheme, setActiveTheme] = useState<string | undefined>(undefined);
@@ -24,7 +33,8 @@ export const Home = () => {
   const [topRatedPage, setTopRatedPage] = useState<number>(1);
   const [upcomingPage, setUpcomingPage] = useState<number>(1);
 
-  const [prompEvent, setPromptEvent] = useState<any>(null);
+  const [prompEvent, setPromptEvent] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [isPWAInstalled, setIsPWAInstalled] = useState<boolean>();
 
   const { data: nowPlayingMovieListData, isLoading: isNowPlayingLoading } =
@@ -39,7 +49,7 @@ export const Home = () => {
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', event => {
       event.preventDefault();
-      setPromptEvent(event);
+      setPromptEvent(event as BeforeInstallPromptEvent);
     });
 
     setIsPWAInstalled(window.matchMedia('(display-mode: standalone)').matches);
@@ -50,7 +60,9 @@ export const Home = () => {
   }, [theme]);
 
   const installPWA = () => {
-    prompEvent.prompt();
+    if (prompEvent) {
+      prompEvent.prompt();
+    }
   };
 
   return (
